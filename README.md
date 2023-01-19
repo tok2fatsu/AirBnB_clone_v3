@@ -97,6 +97,8 @@ TestBaseModel class:
 * `def test_pep8_conformance_test_file_storage(self)` - Test that tests/test_models/test_file_storage.py conforms to PEP8
 * `def test_file_storage_module_docstring(self)` - Test for the file_storage.py module docstring
 * `def test_file_storage_class_docstring(self)` - Test for the FileStorage class docstring
+* `def test_get(self)` - Test for importing/getting file/input
+* `def test_count(self)` - Test for counting
 
 [/test_models/test_place.py](/tests/test_models/test_place.py) - Contains the TestPlaceDoc class:
 * `def setUpClass(cls)` - Set up for the doc tests
@@ -156,6 +158,7 @@ No known bugs at this time.
 ## Authors
 Alexa Orrico - [Github](https://github.com/alexaorrico) / [Twitter](https://twitter.com/alexa_orrico)  
 Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)
+Fassil Berhane - [Github](https://github.com/tok2fatsu) / [Twitter](https://twitter.com/tok2fatsu)
 
 Second part of Airbnb: Joann Vuong
 ## License
