@@ -68,11 +68,11 @@ class FileStorage:
     def get(self, cls, id):
         """
         Returns object based on class and ID or none if not found
-        """"
+        """
         if (cls is None or id is None):
             return None
         objs = list(self.all(cls).values())
-        return next(filter(lambda x: x,id == id, objs), None)
+        return next(filter(lambda x: id == id, objs), None)
 
     def count(self, cls=None):
         """
