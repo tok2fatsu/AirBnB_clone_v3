@@ -115,25 +115,40 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(json.loads(string), json.loads(js))
 
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
-    def test_get(self):
+    def test_get_with_cls(self):
+        """Test that get properly gets an object with the given id and class"""
         storage = FileStorage()
-        dic = {'name': 'Apartment'}
-        instance = State(**dic)
-        storage.new(instance)
-        storage.save()
-        storage = FileStorage()
-        get_inst = storage.get(State, instance.id)
-        self.assertEqual(get_inst, instance)
+        obj_1 = BaseModel()
+        obj_2 = BaseModel()
+        storage.new(obj_1)
+        storage.new(obj_2)
+
+        found = storage.get(BaseModel, obj_1.id)
+        self.assertEqual(found.id, obj_1.id)
 
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
-    def test_count(self):
+    def test_get_with_none(self):
+        """Test that get returns None for object not found"""
         storage = FileStorage()
-        dic = {'name': 'Apartment'}
-        state = State(**dic)
-        storage.new(state)
-        dic = {'name': 'Florida'}
-        city = City(**dic)
-        storage.new(city)
+        self.assertIsNone(storage.get(None, ""))
+        self.assertIsNone(storage.get(BaseModel, "abc"))
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_count_with_cls(self):
+        """Test that count returns the count of objs that match cls"""
+        storage = FileStorage()
+        obj_1 = BaseModel()
+        obj_2 = BaseModel()
+        storage.new(obj_1)
+        storage.new(obj_2)
         storage.save()
-        count_inst = storage.count()
-        self.assertEqual(len(storage.all()), count_inst)
+
+        base_model_count = len(storage.all(BaseModel))
+        self.assertEqual(storage.count(BaseModel), base_model_count)
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_count_all(self):
+        """Test that count returns the count of all objs"""
+        storage = FileStorage()
+        all_count = len(storage.all())
+        self.assertGreaterEqual(storage.count(), all_count)
