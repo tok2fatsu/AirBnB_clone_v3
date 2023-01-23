@@ -75,7 +75,7 @@ class DBStorage:
         """
         Returns the object based on the class and its ID, or None if not found
         """
-        if (cls is None ir id is None):
+        if (cls is None or id is None):
             return None
         return self.__session.query(cls).filter_by(id=id).first()
 
